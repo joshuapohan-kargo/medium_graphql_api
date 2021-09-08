@@ -29,3 +29,8 @@ config :phoenix, :json_library, Jason
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"
+
+# Guardian config details
+config :medium_graphql_api, MediumGraphqlApi.Guardian,
+       issuer: "medium_graphql_api",
+       secret_key: "bAJ/eSdeFsLRyh1dLEJewp/65jcTusEqxByMCgqsof5ac9K3+8Pp0NhR+uytabOb"
