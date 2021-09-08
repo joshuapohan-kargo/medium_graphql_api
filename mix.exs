@@ -35,7 +35,7 @@ defmodule MediumGraphqlApi.MixProject do
     [
       {:phoenix, "~> 1.5.12"},
       {:phoenix_ecto, "~> 4.4"},
-      {:ecto_sql, "~> 3.4"},
+      {:ecto_sql, "~> 3.6.2"},
       {:postgrex, ">= 0.0.0"},
       {:phoenix_live_dashboard, "~> 0.4"},
       {:telemetry_metrics, "~> 0.4"},
@@ -45,9 +45,10 @@ defmodule MediumGraphqlApi.MixProject do
       {:plug_cowboy, "~> 2.0"},
       {:comeonin, "~> 4.0"},
       {:argon2_elixir, "~> 1.2"},
-      {:absinthe, ">= 0.0.0"},
-      {:absinthe_plug, ">= 0.0.0"},
-      {:absinthe_ecto, ">= 0.0.0"}
+      {:absinthe, "~> 1.4"},
+      {:absinthe_plug, "~> 1.4"},
+      {:absinthe_relay, "~> 1.4"},
+      {:absinthe_ecto, "~> 0.1.3"}
     ]
   end
 
