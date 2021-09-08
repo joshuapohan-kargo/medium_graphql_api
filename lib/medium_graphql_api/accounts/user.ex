@@ -21,10 +21,14 @@ defmodule MediumGraphqlApi.Accounts.User do
     |> validate_required([:first_name, :last_name, :email, :password, :password_confirmation, :role])
     |> validate_format(:email, ~r/@/)
     |> update_change(:email, &String.downcase(&1))
-    |> validate_length(:password, min:6, max:100)
+    |> validate_length(:password, min: 6, max: 100)
     |> validate_confirmation(:password)
     |> unique_constraint(:email)
     |> hash_password
+  end
+
+  defp hash_password(%Ecto.Changeset{valid?: true, changes: %{password: password}} = changeset) do
+    change(changeset, Comeonin.Argon2.add_hash(password))
   end
 
   defp hash_password(changeset) do

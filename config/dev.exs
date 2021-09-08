@@ -5,7 +5,7 @@ config :medium_graphql_api, MediumGraphqlApi.Repo,
   username: "postgres",
   password: "postgres",
   database: "medium_graphql_api_dev",
-  hostname: "localhost",
+  hostname: "172.19.129.98",
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
 
