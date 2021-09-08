@@ -1,8 +1,8 @@
 defmodule MediumGraphqlApi.Guardian do
     use Guardian, otp_app: :medium_graphql_api
-    alias MediumGraphqlApi.Accounts.User
+    alias MediumGraphqlApi.Accounts
 
-    def subject_for_token(user, _claims) do
+    def subject_for_token(%Accounts.User{} = user, _claims) do
       # You can use any value for the subject of your token but
       # it should be useful in retrieving the resource later, see
       # how it being used on `resource_from_claims/1` function.
@@ -16,14 +16,11 @@ defmodule MediumGraphqlApi.Guardian do
       {:error, :reason_for_error}
     end
   
-    def resource_from_claims(claims) do
-      # Here we'll look up our resource from the claims, the subject can be
-      # found in the `"sub"` key. In above `subject_for_token/2` we returned
-      # the resource id so here we'll rely on that to look it up.
-        user = claims["sub"]
-        |> Accounts.User.get_user!()
-
-        {:ok, user}
+    def resource_from_claims(%{"sub" => id}) do
+      case Accounts.get_user!(id) do
+        nil -> {:error, :resource_not_found}
+        user -> {:ok, user}
+      end
     end
 
     def resource_from_claims(_claims) do
